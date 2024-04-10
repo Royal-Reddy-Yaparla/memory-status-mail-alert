@@ -29,7 +29,7 @@ do
     disk=$(echo $line | awk '{print $1F}' )
     if [ $usage -gt $DISK_THRUSHOLD ]
     then 
-        MESSEAGE+="Warning: Disk usage is above the configured limit \nDisk Name: $disk Current_Usage :$R $usage% $N"
+        MESSEAGE+="Warning: Disk usage is above the configured limit Disk Name: $disk Current_Usage : $usage% "
     fi
 done <<< $DISK_USAGE
 
