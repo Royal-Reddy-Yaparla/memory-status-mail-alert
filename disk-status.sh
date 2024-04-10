@@ -19,13 +19,13 @@ TIMESTAMP=$(date +%F-%H-%M-%S)
 LOG_FILE="/tmp/$0-$TIMESTAMP.log"
 
 # USAGE=$(df -h | grep -Ev 'tmpf' | grep -Ev 'efivarfs' | awk '{print $5F}' | cut -d "%" -f 1)
-DISK_USAGE=$(df -hT | grep -vE 'tmp|efivarfs')
+DISK_USAGE=$(df -hT | grep -vE 'tmp|efivarfs' | tail -n +2)
 echo "$DISC_USAGE"
 
 while IFS= read line
 do 
     # echo "$line"
-    usage=$(echo $line | awk '{print $6F}' | cut -d "%" -f1)
+    usage=$(echo $line | awk '{print $6F}' | cut -d "%" -f 1)
     disk=$(echo $line | awk '{print $1F}' )
     echo -e "Disk : $disk Usage $R $usage $N"
 done <<< $DISK_USAGE
