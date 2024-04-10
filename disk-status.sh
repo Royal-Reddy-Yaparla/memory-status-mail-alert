@@ -5,6 +5,7 @@
 # Date: 10-04
 # Version: V1
 # Purpose: Send Disc usage aleart mail
+# Input: disc_limit and to mail id
 ################################################
 
 ID=$(id -u)
@@ -20,7 +21,8 @@ LOG_FILE="/tmp/$0-$TIMESTAMP.log"
 
 # USAGE=$(df -h | grep -Ev 'tmpf' | grep -Ev 'efivarfs' | awk '{print $5F}' | cut -d "%" -f 1)
 DISK_USAGE=$(df -hT | grep -vE 'tmp|efivarfs' | tail -n +2)
-DISK_THRUSHOLD=1
+DISK_THRUSHOLD=$1
+TO_MAIL=$2
 MESSEAGE=""
 while IFS= read line
 do 
@@ -33,4 +35,4 @@ do
     fi
 done <<< $DISK_USAGE
 
-sh mail.sh "DevOps Team" "High Disk Usage" "$MESSEAGE" "royalreddy364@gmail.com" "ALERT Hign Disc Usage"
+sh mail.sh "DevOps Team" "High Disk Usage" "$MESSEAGE" "$TO_MAIL" "ALERT Hign Disc Usage"
