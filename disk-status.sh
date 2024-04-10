@@ -25,7 +25,7 @@ echo "$DISC_USAGE"
 while IFS= read line
 do 
     # echo "$line"
-    usage=$(echo $line | awk '{print $6F}' | cut -d "%" -f 1)
+    usage=$(echo $line | awk '{print $6F}' | cut -d "%" -f1)
     disk=$(echo $line | awk '{print $1F}' )
     echo -e "Disk : $disk Usage $R $usage $N"
 done <<< $DISK_USAGE
