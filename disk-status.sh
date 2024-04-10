@@ -20,12 +20,16 @@ LOG_FILE="/tmp/$0-$TIMESTAMP.log"
 
 # USAGE=$(df -h | grep -Ev 'tmpf' | grep -Ev 'efivarfs' | awk '{print $5F}' | cut -d "%" -f 1)
 DISK_USAGE=$(df -hT | grep -vE 'tmp|efivarfs' | tail -n +2)
-echo "$DISC_USAGE"
+DISK_THRUSHOLD=1
 
 while IFS= read line
 do 
     # echo "$line"
     usage=$(echo $line | awk '{print $6F}' | cut -d "%" -f 1)
     disk=$(echo $line | awk '{print $1F}' )
-    echo -e "Disk : $disk Usage $R $usage $N"
+    if [ $usage -gt $DISK_THRUSHOLD ]
+    then 
+        echo -e "Warning: Disk usage is above the configured limit \nDisk Name: $disk Current_Usage :$R $usage% $N"
+
+    fi
 done <<< $DISK_USAGE
