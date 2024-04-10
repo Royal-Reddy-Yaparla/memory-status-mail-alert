@@ -21,7 +21,7 @@ LOG_FILE="/tmp/$0-$TIMESTAMP.log"
 # USAGE=$(df -h | grep -Ev 'tmpf' | grep -Ev 'efivarfs' | awk '{print $5F}' | cut -d "%" -f 1)
 DISK_USAGE=$(df -hT | grep -vE 'tmp|efivarfs' | tail -n +2)
 DISK_THRUSHOLD=1
-
+MESSEAGE=""
 while IFS= read line
 do 
     # echo "$line"
@@ -33,4 +33,6 @@ do
     fi
 done <<< $DISK_USAGE
 
-echo "$MESSEAGE" | mail -s "message" royalreddy364@gmail.com
+# echo "$MESSEAGE" | mail -s "message" royalreddy364@gmail.com
+
+echo "<b>Disc Usage Alret</b>" | mail -s "$(echo -e "$MESSEAGE\nContent-Type: text/html")" royalreddy364@gmail.com
