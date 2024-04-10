@@ -26,5 +26,6 @@ while IFS= read line
 do 
     # echo "$line"
     usage=$(echo $line | awk '{print $6F}' | cut -d "%" -f 1)
-    echo -e "Usage $R $usage $N"
+    disk=$(echo $line | awk '{print $1F}' )
+    echo -e "Disk : $disk Usage $R $usage $N"
 done <<< $DISK_USAGE
