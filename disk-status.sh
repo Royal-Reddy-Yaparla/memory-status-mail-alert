@@ -24,4 +24,4 @@ do
     fi
 done <<< $DISK_USAGE
 
-sh mail.sh "DevOps Team" "High Disk Usage" "$MESSEAGE" "$TO_MAIL" "ALERT Hign Disc Usage" "$DISK_THRUSHOLD"
+sh mail.sh "DevOps Team" "High Disk Usage" "$MESSEAGE" "$TO_MAIL" "ALERT Hign Disc Usage" "$DISK_THRUSHOLD%"
